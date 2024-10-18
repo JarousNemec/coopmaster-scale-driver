@@ -1,0 +1,7 @@
+services:
+  coop_scale_driver:
+    build:
+      context: .
+    restart: always
+    ports:
+      - "9004:9004"
