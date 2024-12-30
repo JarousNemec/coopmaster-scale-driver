@@ -13,8 +13,9 @@ def flask_app():
 
     @app.route("/")
     def hello_world():
-        logging.info("Hello World!")
-        return configuration.hello_message
+        message = 'Hello World from scale driver!'
+        logging.info(message)
+        return message
 
     app.register_blueprint(weight_blueprint)
 
@@ -24,8 +25,11 @@ def flask_app():
 
     return app
 
-def server(host: str = "127.0.0.1", port: int = 80, ssl: bool = False):
+
+def server():
     manager_app = flask_app()
     start_weight_gobbler()
-    logging.info("Serving on http://"+configuration.host+":"+str(port))
+    host = configuration.config.HOST
+    port = configuration.config.PORT
+    logging.info(f"Serving on http://{host}:{port}")
     serve(manager_app,  port=port)

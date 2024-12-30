@@ -8,8 +8,8 @@ import datetime
 weight_data = ""
 
 
-WEIGHT_COM_PORT = "COM4"
-# WEIGHT_COM_PORT = "/dev/ttyUSB0"  # linux Ubuntu wth weight Arduino
+# WEIGHT_COM_PORT = "COM4"
+WEIGHT_COM_PORT = ("/dev/ttyUSB1")  # linux Ubuntu wth weight Arduino
 WEIGHT_INTERVAL_SEC = 0.9
 
 
@@ -38,6 +38,7 @@ def run_gobbler():
         str_to_write = time_to_log + ";0; weight check started;\n"
         f.write(str_to_write)
 
+
         arduino = serial.Serial(port=WEIGHT_COM_PORT,baudrate=9600, timeout=1)
         if arduino:
             while True:
@@ -64,6 +65,9 @@ def run_gobbler():
                     logging.exception(ex)
 
     except Exception as ex:
+        # if permission denied occurred, try
+        # "sudo usermod -a -G tty yourname"
+
         logging.exception(ex)
 
 
