@@ -5,12 +5,12 @@ import logging
 import time as atime
 import datetime
 
+from app import configuration
+
 weight_data = ""
 
 
-# WEIGHT_COM_PORT = "COM4"
-WEIGHT_COM_PORT = ("/dev/ttyUSB1")  # linux Ubuntu wth weight Arduino
-WEIGHT_INTERVAL_SEC = 0.9
+
 
 
 def get_weight_number(d):  # nacteni vahy z dat
@@ -39,12 +39,17 @@ def run_gobbler():
         f.write(str_to_write)
 
 
-        arduino = serial.Serial(port=WEIGHT_COM_PORT,baudrate=9600, timeout=1)
+        arduino = serial.Serial(
+            port=configuration.config.WEIGHT_COM_PORT,
+            baudrate=9600,
+            timeout=1
+        )
         if arduino:
             while True:
                 try:
                     # 30 vterin pauza pro cteni vahy
-                    atime.sleep(WEIGHT_INTERVAL_SEC)
+                    atime.sleep(configuration.config.WEIGHT_INTERVAL_SEC)
+
                     # cmd 'w' zadam arduino po seriovem portu o poslani aktualni vahy
                     written_lenght = arduino.write('w'.encode('ascii'))
                     #if written_lenght != 1:

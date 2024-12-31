@@ -18,6 +18,9 @@ class AppConfigError(Exception):
 class AppConfig:
     PORT: int = 9002
     HOST: str = "127.0.0.1"
+    # WEIGHT_COM_PORT = "COM4"
+    WEIGHT_COM_PORT: str = "/dev/ttyUSB0"  # linux Ubuntu wth weight Arduino
+    WEIGHT_INTERVAL_SEC: float = 0.9
 
     """
     Map environment variables to class fields according to these rules:
