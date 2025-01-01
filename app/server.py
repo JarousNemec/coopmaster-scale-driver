@@ -19,10 +19,6 @@ def flask_app():
 
     app.register_blueprint(weight_blueprint)
 
-    @app.route("/api/weight")
-    def weight():
-        return
-
     return app
 
 
