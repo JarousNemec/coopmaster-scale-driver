@@ -10,9 +10,6 @@ from app import configuration
 weight_data = ""
 
 
-
-
-
 def get_weight_number(d):  # nacteni vahy z dat
     try:
         weight_string = str(d.replace("\r\n", ""))
@@ -59,6 +56,7 @@ def run_gobbler():
                     str_read_weight = arduino.readline().decode('ascii')
                     incomming_weight = get_weight_number(str_read_weight)
 
+                    # todo: fix time zone
                     time_to_log = datetime.datetime.now().strftime("%H:%M:%S")
                     #time_to_log = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                     # zaloguj ji
